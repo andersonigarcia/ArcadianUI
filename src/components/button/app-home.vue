@@ -1,22 +1,29 @@
 <template>
   <div>
-    <app-botao prop_id="Home" prop_size="md" prop_icon="home" prop_title="home" prop_disabled prop_event_emitido="PaginaInicial" @PaginaInicial='PaginaInicial'></app-botao>
+    <app-botao
+      propAcao="PaginaInicial"
+      propSize="md"
+      propIcon="home"
+      propTitle="Home"
+      propDisabled
+      @PaginaInicial="PaginaInicial"
+    ></app-botao>
   </div>
 </template>
 
 <style></style>
 
 <script>
-import appBotao from '../atomicos/button.vue'
+import appBotao from "../atomicos/BaseButton.vue";
 
 export default {
-  components:{
+  components: {
     appBotao
   },
-  methods:{
-    PaginaInicial () {
-      this.$router.push('/');
-      }
+  methods: {
+    PaginaInicial() {
+      this.$router.push("/");
     }
   }
+};
 </script>

@@ -1,23 +1,31 @@
 <template>
   <div>
-    <app-botao prop_id="Tarefas" prop_size="md" prop_icon="assignment" prop_title="Tarefas" prop_disabled prop_event_emitido="ExibirTarefas" @ExibirTarefas='ExibirTarefas'></app-botao>
+    <app-botao
+      propAcao="ExibirTarefas"
+      propSize="md"
+      propIcon="assignment"
+      propTitle="Tarefas"
+      propDisabled
+      @ExibirTarefas="ExibirTarefas"
+    ></app-botao>
   </div>
 </template>
 
-<style> </style>
+<style>
+</style>
 
 <script>
-  import appBotao from "../atomicos/button";
+import appBotao from "../atomicos/BaseButton";
 
-  export default{
-    components:{
-        appBotao
-    },
-    methods:{
-      ExibirTarefas (){
-        this.$router.push('/tarefas')
-        console.log("...evento ExibirTarefas recebido com sucesso.")
-      }
+export default {
+  components: {
+    appBotao
+  },
+  methods: {
+    ExibirTarefas() {
+      this.$router.push("/tarefas");
+      console.log("...evento ExibirTarefas recebido com sucesso.");
     }
   }
+};
 </script>

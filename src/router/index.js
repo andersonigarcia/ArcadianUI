@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueMoment from "vue-moment";
 
 import routes from './routes'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter, VueMoment)
 
 const Router = new VueRouter({
   /*
@@ -17,7 +18,9 @@ const Router = new VueRouter({
   // Leave as is and change from quasar.conf.js instead!
   mode: process.env.VUE_ROUTER_MODE,
   base: process.env.VUE_ROUTER_BASE,
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({
+    y: 0
+  }),
   routes
 })
 

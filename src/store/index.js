@@ -1,14 +1,25 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import produtos from './produtos'
+import state from './state'
+import * as getters from './getters'
+import * as mutations from './mutations'
+import * as actions from './actions'
 
 Vue.use(Vuex)
 
-const store = new Vuex.Store({
-  modules: {
-    produtos
-  }
-})
+/*
+ * If not building with SSR mode, you can
+ * directly export the Store instantiation
+ */
 
-export default store
+export default function (/* { ssrContext } */) {
+  const Store = new Vuex.Store({
+    state: state,
+    getters: getters,
+    mutations: mutations,
+    actions: actions
+  })
+
+  return Store
+}

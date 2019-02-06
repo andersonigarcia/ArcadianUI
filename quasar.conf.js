@@ -25,12 +25,11 @@ module.exports = function (ctx) {
       // gzip: true,
       // analyze: true,
       // extractCSS: false,
-      extendWebpack (cfg) {
-      }
+      extendWebpack(cfg) {}
     },
     devServer: {
       // https: true,
-      // port: 8080,
+      port: 3000,
       open: true // opens browser window automatically
     },
     // framework: 'all' --- includes everything; for dev only!
@@ -73,7 +72,12 @@ module.exports = function (ctx) {
         'QCardMain',
         'QCardMedia',
         'QCardSeparator',
-        'QCardActions'
+        'QCardActions',
+        'QInfiniteScroll',
+        'QAlert',
+        'QSpinnerDots',
+        'QAutocomplete',
+        'QCheckbox'
       ],
       directives: [
         'Ripple',
@@ -82,13 +86,16 @@ module.exports = function (ctx) {
       // Quasar plugins
       plugins: [
         'Notify',
-        'Dialog'
+        'Dialog',
+        'Loading'
       ]
       // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
       // i18n: 'de' // Quasar language
     },
     // animations: 'all' --- includes all animations
     animations: [
+      'fadeIn',
+      'fadeOut'
     ],
     pwa: {
       // workboxPluginMode: 'InjectManifest',
@@ -102,8 +109,7 @@ module.exports = function (ctx) {
         background_color: '#ffffff',
         theme_color: '#027be3',
 
-        icons: [
-          {
+        icons: [{
             'src': 'statics/icons/icon-128x128.png',
             'sizes': '128x128',
             'type': 'image/png'
@@ -136,7 +142,7 @@ module.exports = function (ctx) {
     },
     electron: {
       // bundler: 'builder', // or 'packager'
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
         // do something with Electron process Webpack cfg
       },
       packager: {
@@ -156,12 +162,15 @@ module.exports = function (ctx) {
 
         // appId: 'quasar-app'
 
-        extendWebpack (cfg) {
+        extendWebpack(cfg) {
           cfg.module.rules.push({
             resourceQuery: /blockType=i18n/,
-            use: [
-              {loader: '@kazupon/vue-i18n-loader'},
-              {loader: 'yaml-loader'}
+            use: [{
+                loader: '@kazupon/vue-i18n-loader'
+              },
+              {
+                loader: 'yaml-loader'
+              }
             ]
           })
         }

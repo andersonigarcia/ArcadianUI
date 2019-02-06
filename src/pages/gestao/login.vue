@@ -1,26 +1,45 @@
 <template>
-<!-- https://forum.vuejs.org/t/how-do-i-redirect-user-to-proper-page/8243 -->
-  <q-page padding >
+  <!-- https://forum.vuejs.org/t/how-do-i-redirect-user-to-proper-page/8243 -->
+  <q-page padding>
 
-      <q-card class="q-pa-md" >
+    <q-card class="q-pa-md">
 
-        <div style="text-align: center;">
-          <img alt="Arcadian logo" src="~assets/arcadian-logo_1.png" height="50%" width="50%">
-        </div>
+      <div style="text-align: center;">
+        <img
+          alt="Arcadian logo"
+          src="~assets/arcadian-logo_1.png"
+          height="50%"
+          width="50%"
+        >
+      </div>
 
-        <div>
-          <q-input v-model="usuario" type="text"  float-label="Usuário" />
-        </div>
+      <div>
+        <q-input
+          v-model="usuario"
+          type="text"
+          float-label="Usuário"
+        />
+      </div>
 
-        <div>
-          <q-input v-model="senha" type="password" float-label="Senha" />
-        </div>
+      <div>
+        <q-input
+          v-model="senha"
+          type="password"
+          float-label="Senha"
+        />
+      </div>
 
-        <div class="q-pt-md">
-          <q-btn class="full-width" dense label="ENTRAR" color="blue-grey-5" @click="entrar"></q-btn>
-        </div>
+      <div class="q-pt-md">
+        <q-btn
+          class="full-width"
+          dense
+          label="ENTRAR"
+          color="blue-grey-5"
+          @click="entrar"
+        ></q-btn>
+      </div>
 
-     </q-card>
+    </q-card>
   </q-page>
 </template>
 
@@ -45,7 +64,7 @@ export default {
         return
       }
     },
-    entrar (){
+    entrar () {
       console.log("Botão entrar...")
 
     }

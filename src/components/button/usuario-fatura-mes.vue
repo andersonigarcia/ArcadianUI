@@ -1,21 +1,28 @@
 <template>
-  <app-botao prop_id="FaturaMes" prop_size="md" prop_icon="assessment" prop_title="Fatura no mês" prop_disabled prop_event_emitido="ExibirFaturaMes" @ExibirFaturaMes="ExibirFaturaMes"></app-botao>
+  <app-botao
+    propAcao="ExibirFaturaMes"
+    propTitle="Fatura no mês"
+    propSize="md"
+    propIcon="assessment"
+    propDisabled
+    @ExibirFaturaMes="ExibirFaturaMes"
+  ></app-botao>
 </template>
 
 <style></style>
 
 <script>
-import appBotao from "../atomicos/button.vue";
+import appBotao from "../atomicos/BaseButton.vue";
 
 export default {
   components: {
     appBotao
   },
-  methods:{
-    ExibirFaturaMes (){
-      console.log("...evento ExibirFaturaMes recebido com sucesso.")
+  methods: {
+    ExibirFaturaMes() {
+      console.log("...evento ExibirFaturaMes recebido com sucesso.");
     }
   }
-}
+};
 </script>
 

@@ -1,20 +1,28 @@
 <template>
-    <app-botao prop_id="TarefasAtrasadas" prop_size="md" prop_icon="assignment_late" prop_title="Tarefas atrasadas" prop_disabled prop_event_emitido="ExibirTarefasAtrasadas" @ExibirTarefasAtrasadas='ExibirTarefasAtrasadas'></app-botao>
+  <app-botao
+    propAcao="ExibirTarefasAtrasadas"
+    propTitle="Tarefas em atraso"
+    propSize="md"
+    propIcon="assignment_late"
+    propDisabled
+    @ExibirTarefasAtrasadas="ExibirTarefasAtrasadas"
+  ></app-botao>
 </template>
 
-<style> </style>
+<style>
+</style>
 
 <script>
-import appBotao from "../atomicos/button.vue";
+import appBotao from "../atomicos/BaseButton.vue";
 
 export default {
-  components:{
+  components: {
     appBotao
   },
-  methods:{
-    ExibirTarefasAtrasadas(){
-      console.log("...evento ExibirTarefasAtrasadas recebido com sucesso.")
+  methods: {
+    ExibirTarefasAtrasadas() {
+      console.log("...evento ExibirTarefasAtrasadas recebido com sucesso.");
     }
   }
-}
+};
 </script>

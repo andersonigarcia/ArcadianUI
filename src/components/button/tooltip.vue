@@ -1,30 +1,40 @@
 <template >
   <div>
-    <q-btn dense :id="prop_id" :disabled="prop_disabled" :rounded="prop_rounded" :size="prop-Size" :icon="prop_icon" :color="prop_color" :title="prop_title">
+    <q-btn
+      dense
+      :id="propId"
+      :disabled="propDisabled"
+      :rounded="propRounded"
+      :size="propSize"
+      :icon="propIcon"
+      :color="propColor"
+      :title="propTitle"
+    >
       <q-tooltip v-model="showing">{{mesagem}}</q-tooltip>
     </q-btn>
   </div>
 </template>
 
-<style> </style>
+<style>
+</style>
 
 <script>
 export default {
-  props:{
-    prop_id: { type: String, required: true },
-    prop_title: { type: String,  required: true, default: "?" },
-    prop_size: { type: String, default: "md" },
-    prop_icon: { type: String, default: "adb" },
-    prop_color: { type: String, default: "blue-grey-6" },
-    prop_disabled: { type: Boolean, default: false },
-    prop_rounded: {type: Boolean, default: true }
+  props: {
+    propId: { type: String, required: true },
+    propTitle: { type: String, required: true, default: "?" },
+    propSize: { type: String, default: "md" },
+    propIcon: { type: String, default: "adb" },
+    propColor: { type: String, default: "blue-grey-6" },
+    propDisabled: { type: Boolean, default: false },
+    propRounded: { type: Boolean, default: true }
   },
-  data(){
-    return{
+  data() {
+    return {
       mesagem: "Nenhum registro foi encontrado",
       showing: false
-    }
+    };
   }
-}
+};
 </script>
 

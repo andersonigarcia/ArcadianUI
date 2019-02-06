@@ -1,28 +1,34 @@
 <template >
-  <app-botao prop_id="Mensagens" prop_size="md" prop_icon="mail_outline" prop_title="Mensagens" prop_event_emitido="ExibirMensagem" @ExibirMensagem="ExibirMensagem"></app-botao>
+  <app-botao
+    propAcao="ExibirMensagem"
+    propTitle="Mensagens"
+    propSize="md"
+    propIcon="mail_outline"
+    @ExibirMensagem="ExibirMensagem"
+  ></app-botao>
 </template>
 
-<style> </style>
+<style>
+</style>
 
 <script>
-import appBotao from "../atomicos/button.vue";
+import appBotao from "../atomicos/BaseButton.vue";
 
 export default {
   components: {
     appBotao
   },
-  data (){
-      return{
-        mesagem:'Nenhuma mensagem encontrada',
-        showing: false
-      }
-    },
-  methods:{
-    ExibirMensagem () {
-      console.log("...evento ExibirMensagem recebido com sucesso.")
+  data() {
+    return {
+      mesagem: "Nenhuma mensagem encontrada",
+      showing: false
+    };
+  },
+  methods: {
+    ExibirMensagem() {
+      console.log("...evento ExibirMensagem recebido com sucesso.");
     }
   }
-
-}
+};
 </script>
 

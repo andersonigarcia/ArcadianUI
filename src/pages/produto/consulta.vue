@@ -1,18 +1,29 @@
 <template>
-  <q-page padding >
-    <acoes @Cancelar="cancelar" titulo="Lista de produtos"></acoes>
-    <dropDownList propLabel="Categoria de produtos" :propLista= lista> </dropDownList>
-    <tabelaBase :idProduto="keyProduto" propTitle="Lista de produtos" propDesc:false linhaPorPagina:7></tabelaBase>
+  <q-page padding>
+    <acoes
+      @Cancelar="cancelar"
+      titulo="Lista de produtos"
+    ></acoes>
+    <dropDownList
+      propLabel="Categoria de produtos"
+      :propLista="lista"
+    ></dropDownList>
+    <tabelaBase
+      :idProduto="keyProduto"
+      propTitle="Lista de produtos"
+      propDesc:false
+      linhaPorPagina:7
+    ></tabelaBase>
   </q-page>
 </template>
 
 <script>
- import dropDownList from '../../components/atomicos/dropdown'
- import tabelaBase from '../../components/atomicos/lista'
+import dropDownList from "../../components/atomicos/BaseDropdown";
+import tabelaBase from "../../components/atomicos/lista";
 
 //Temporário, transformar em um GET para a API
- import categorias from '../../Matriz_Dados/produto-categorias.json'
- import acoes from '../../components/button/paleta-edicao'
+import categorias from "../../Matriz_Dados/xproduto-categorias.json";
+import acoes from "../../components/button/paleta-principal";
 
 export default {
   name: "PageProdutos",
@@ -21,20 +32,29 @@ export default {
     tabelaBase,
     acoes
   },
-  data (){
+  data () {
     return {
-      lista: categorias,
-      keyProduto : 25
-
-      }
+      lista: [],
+      keyProduto: 25
+    };
   },
-  methods:{
-      cancelar(){
-        console.log("...cancelando ação do dialog")
-      }
+  methods: {
+    cadastrar () {
+      //this.$router.push('/cadastrar')
+      console.log("...cadastrar");
+    },
+    cancelar () {
+      console.log("...cancelando ação do dialog");
     }
-}
-
+    // async listProdutos () {
+    //   this.$q.loading.show()
+    //   const data = await this.$store.produtos.dispatch('listProdutos')
+    //   this.lista = data && data.produtos ? data.produtos : []
+    //   this.configurePagination()
+    //   this.$q.loading.hide()
+    // }
+  }
+};
 </script>
 
 

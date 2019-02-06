@@ -1,0 +1,64 @@
+{
+  "success": true,
+  "data": [{
+      "ordem_servico": {
+        "os_tag": "19B5",
+        "os_id": "46e57dc5-0ad6-42ee-9897-5b855621d549",
+        "data_entrada": "2019-02-04T11:12:18.272473",
+        "data_desejada": "2019-02-10T18:00:00",
+        "data_prevista": null,
+        "caixa": "42",
+        "caixa_cor": "Branca",
+        "observacao": "cores in loco 31-99111-3210",
+        "valor_tabelado": null,
+        "valor_cobrado": null,
+        "ajuste_percentual": null,
+        "cliente_id": "2a0937da-77b2-42da-a459-5b8b8d6f4bdb",
+        "cliente_nome": "MAURO CLIENTE",
+        "paciente_id": "f6d5acc4-eef4-4fd1-a495-4e308bcaa0f8",
+        "paciente_nome": "PACATO PACIENTE",
+        "valor_tabela_dsc": "Valor total tabelado R$ 1.128,82",
+        "desconto_aplicado_cliente": "Desconto aplicado 10% para o cliente R$ 112,88",
+        "desconto_aplicado_produto": "Desconto de R$ 6,00 aplicado para  Gesso: vazamento"
+      }
+    },
+    {
+      "servicos": [{
+          "servico_id": "1bde2277-cdd3-42c3-8277-f46b1b8a8f2b",
+          "produto_id": "da1060c7-28c0-45b4-97b0-78953837f1c9",
+          "produto_nome": "COROA SILICONADA",
+          "categoria_nome": "CATEGORIA BASE",
+          "data_entrada": "2019-02-04T14:33:37.368873",
+          "data_prevista": "2019-02-04T14:33:10.156279",
+          "valor_cobrado": 555.55,
+          "ajuste_percentual": -10,
+          "ajuste_valor": 0,
+          "quantidade_itens": 2
+        },
+        {
+          "servico_id": "1bde2277-cdd3-42c3-8277-f46b1b8a8f2b",
+          "produto_id": "da1060c7-28c0-45b4-97b0-78953837f1c9",
+          "produto_nome": "COROA SILICONADA",
+          "categoria_nome": "CATEGORIA BASE",
+          "data_entrada": "2019-02-04T14:33:37.368873",
+          "data_prevista": "2019-02-04T14:33:10.156279",
+          "valor_cobrado": 555.55,
+          "ajuste_percentual": -10,
+          "ajuste_valor": 0,
+          "quantidade_itens": 2
+        }, {
+          "servico_id": "1bde2277-cdd3-42c3-8277-f46b1b8a8f2b",
+          "produto_id": "da1060c7-28c0-45b4-97b0-78953837f1c9",
+          "produto_nome": "COROA SILICONADA",
+          "categoria_nome": "CATEGORIA BASE",
+          "data_entrada": "2019-02-04T14:33:37.368873",
+          "data_prevista": "2019-02-04T14:33:10.156279",
+          "valor_cobrado": 555.55,
+          "ajuste_percentual": -10,
+          "ajuste_valor": 0,
+          "quantidade_itens": 2
+        }
+      ]
+    }
+  ]
+}
