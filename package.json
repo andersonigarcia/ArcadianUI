@@ -1,31 +1,31 @@
 {
-  "name": "arcadian_pro",
-  "version": "1.0.0",
-  "description": "Interface da aplicação do módulo laboratório",
-  "productName": "Acadian_Pro",
-  "cordovaId": "br.com.arcadian",
-  "author": "Anderson S. Garcia <andersongarcia.analista@gmail.com>",
+  "name": "arcadian",
+  "version": "0.0.1",
+  "description": "Gestão da Produção Laboratorial",
+  "productName": "Vincer",
+  "cordovaId": "org.cordova.quasar.app",
+  "author": "Vincer Team <arcdian@arcadian.pro>",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.3.1",
-    "autoprefixer": "^9.4.6",
-    "await-to-js": "^2.1.1",
-    "axios": "^0.18.0",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-runtime": "^6.26.0",
-    "dialog": "file:src/plugins/Dialog",
-    "postcss-cli": "^6.1.1",
-    "vue-moment": "^4.0.0"
+    "@quasar/extras": "^1.2.0",
+    "accounting-js": "^1.1.1",
+    "axios": "^0.18.1",
+    "quasar": "^1.0.5",
+    "v-money": "^0.8.1",
+    "vuedraggable": "^2.23.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-transform-runtime": "^7.2.0",
-    "quasar-cli": "^0.17.0",
-    "strip-ansi": "^3.0.1"
+    "@quasar/app": "^1.0.4",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.2",
+    "eslint": "^5.16.0",
+    "eslint-loader": "^2.2.1",
+    "eslint-plugin-vue": "^5.2.3",
+    "strip-ansi": "=3.0.1"
   },
   "engines": {
     "node": ">= 8.9.0",
@@ -37,7 +37,7 @@
     "last 2 versions",
     "not ie <= 10"
   ],
-  "main": ".postcssrc.js",
-  "keywords": [],
-  "license": "ISC"
+  "resolutions": {
+    "ajv": "6.8.1"
+  }
 }

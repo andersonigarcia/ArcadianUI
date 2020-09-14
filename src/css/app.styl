@@ -1,1 +1,174 @@
-// app global css
+// ============================================================================
+// IMPORTANTE:
+// No arquivo node_modules\@quasar\app\templates\entry\client-entry.styl
+// comentamos a importacao do '~quasar/dist/quasar.styl' para nao duplicar a
+// aplicacao de estilos. Este arquivo '~quasar/dist/quasar.styl' passa a ser
+// importado aqui para que fique no mesmo escopo dos demais estilos da
+// aplicacao, e assim podermos referenciar os estilos usando o @extends
+// ----------------------------------------------------------------------------
+// @see quasar.conf.js
+// ----------------------------------------------------------------------------
+@import '~quasar/dist/quasar.styl'
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+// estilos gerais da aplicacao
+// ----------------------------------------------------------------------------
+@font-face
+  font-family cuprum
+  src url(./fonts/cuprum-regular.woff)
+
+for $z in 1..$brand-count
+  .bg-brand-{$z}
+    background-color $brand-+$z !important
+
+for $z in 1..$brand-count
+  .text-brand-{$z}
+    color $brand-+$z !important
+
+// espaçamentos
+.a-padding
+  padding 4px 8px
+
+.a-lh-md
+  line-height 1.5em !important
+
+.a-lh-sm
+  line-height 1.25em !important
+
+.a-lh-xs
+  line-height 1em !important
+
+// tipografia
+.a-text-caption
+  letter-spacing 0.03333em
+
+.a-text-caption-md
+  @extends .a-lh-sm, .a-text-caption
+  font-size 0.75rem
+
+.a-text-caption-sm
+  @extends .a-lh-xs, .a-text-caption
+  font-size 0.70rem
+
+.a-text-caption-xs
+  @extends .a-text-caption
+  font-size 0.60rem
+  line-height 0.75rem
+
+.a-text-dense
+  font-family 'cuprum' !important
+
+.a-text-dense-ab
+  @extends .a-text-dense, .a-lh-xs
+
+.a-text-dense-lg
+  @extends .a-text-dense-ab, .text-h6
+
+.a-text-dense-md
+  @extends .a-text-dense-ab, .text-subtitle1
+
+.a-text-dense-sm
+  @extends .a-text-dense-ab, .a-text-caption-md
+
+.a-text-dense-xs
+  @extends .a-text-dense-ab, .a-text-caption-sm
+
+// elementos
+.a-hr-horizontal
+  height 1px !important
+  min-height 1px !important
+
+// ----------------------------------------------------------------------------
+// componentes gerais da aplicacao
+// ----------------------------------------------------------------------------
+
+.a-page-footer
+  @extends .fixed-bottom
+  color $grey-6
+  background $grey-2
+  font-size 0.75rem
+  line-height 1rem
+  padding 0 12px 0 0
+  text-align right
+
+.a-page-empty
+
+.a-page-empty:before
+  content "Ops! Nada para mostrar aqui!"
+  text-align center
+  line-height 50vh
+
+// card
+.a-card-size
+  flex-shrink 0
+  flex-grow 1
+  flex-basis 360px
+  max-width 542px !important
+  @media (max-width: 368px)
+    flex-basis 304px
+
+.a-card-shape
+  @extends .q-pa-sm, .rounded-borders
+  border 1px solid $grey-4
+  background-color white
+
+.a-card
+  @extends .a-card-size, .a-card-shape, .shadow-1
+
+.a-card-left
+  padding-right 4px
+  flex-shrink 0
+  width 66px !important
+
+// ----------------------------------------------------------------------------
+// overrides de estilos do quasar
+// ----------------------------------------------------------------------------
+
+// width minimo de 304px para devices menores que 368px (Iphone 5)
+// width minimo de 360px para demais devices
+// width maximo de 1440px para qualquer device
+.q-layout-container
+  @extends .window-height
+  min-width 360px !important
+  @media (min-width: 1440px)
+    border-left 1px solid $grey-4
+    border-right 1px solid $grey-4
+    margin 0 auto
+    max-width 1440px
+  @media (max-width: 368px)
+    min-width 304px !important
+
+.q-toolbar
+  background linear-gradient(90deg, $brand-3 50%, $brand-5 100%)
+
+// overrides para todas as pages
+.q-page
+  background-color $grey-2
+
+// cor do item selecionado na toolbar
+.q-item.q-router-link--active, &--active
+  color $brand-1
+
+// remove arrow de botes dropdown
+.a-remove-btn-dd-arrow .q-btn-dropdown__arrow-container
+  display none
+
+// notifications
+.a-notification-ok .q-notification__actions
+  color white
+
+.a-notification-warn .q-notification__actions
+  color black
+
+.a-notification-error .q-notification__actions
+  color white
+
+// fields
+.q-field--outlined
+    .q-field__control
+      &:after
+        border 1px solid transparent
+    &.q-field--focused
+      .q-field__control:after
+        border-width 1px

@@ -1,6 +1,0 @@
-[
-  { "name": "id", "required": true, "label": "Identificador", "align": "left", "field": "id",  "sortable": true   },
-  { "name": "categoria", "required": true, "label": "Categoria", "align": "left", "field": "categoria", "sortable": true },
-  { "name": "nome", "required": true, "label": "Produto", "align": "left", "field": "nome","sortable": true  },
-  { "name": "valor", "required": true, "type":"decimal", "label": "Preço (R$)", "align": "left", "field": "valor","sortable": true  }
-]

@@ -1,0 +1,104 @@
+#!/usr/bin/env node
+
+const
+  fs = require('fs'),
+  fse = require('fs-extra'),
+  path = require('path'),
+  { spawnSync } = require('child_process')
+
+function copy (file, dest) {
+  const now = Date.now() / 1000
+  const then = now - 100
+  fse.copySync(file, dest)
+  fs.utimes(dest, then, then, (err) => { if (err) throw err })
+}
+
+const loadReverseProxy = () => {
+  console.info(' ')
+  console.info(' ArcadianTeam (re)loading reverse proxy')
+  spawnSync('cmd', [ '/c', 'run.cmd' ], { cwd: '../Arcadian/scripts/Proxy', windowsHide: true, timeout: 3000 })
+}
+
+const customizeQuasar = () => {
+  console.info(' ')
+  console.info(' ArcadianTeam customizando o quasar:')
+
+  // ----------------------------------------------------------------------------
+  // comentamos a linha "import 'quasar/dist/quasar.styl'"
+  // o import é feito pela aplicação no app.styl
+  // permitindo assim o uso do "@extends" para extender nossos proprios estilos
+  console.info('   * import de quasar.styl')
+  let file = './node_modules/@quasar/app/templates/entry/client-entry.js'
+  fs.existsSync(file + '.original') ? copy(file + '.original', file) : copy(file, file + '.original')
+  let content = fs.readFileSync(file, 'utf-8', 'r+')
+  content = content.replace(
+    'import \'quasar/dist/quasar.styl\'',
+    '// comentando por arcadianteam\n//import \'quasar/dist/quasar.styl\''
+  )
+  fs.writeFileSync(file, content)
+
+  // ----------------------------------------------------------------------------
+  // altera a linha de abertura do browser em dev-server fixando a url
+  console.info('   * url de abertura do browser')
+  file = './node_modules/@quasar/app/lib/dev-server.js'
+  fs.existsSync(file + '.original') ? copy(file + '.original', file) : copy(file, file + '.original')
+  const customUrl = 'https://localhost/'
+  content = fs.readFileSync(file, 'utf-8', 'r+')
+  content = content.replace(
+    'function openBrowser (url, opts) {',
+    `function openBrowser (url, opts) {\n  // inserido por arcadianteam\n  url = '${customUrl}'`
+  )
+  fs.writeFileSync(file, content)
+}
+
+const generateImportIndexes = () => {
+  console.info(' Arcadian Team gerando arquivos de índices:')
+
+  const GetVueComponentsRecursively = (source) => {
+    let subdirs = []
+    let files = []
+    fs.readdirSync(source).forEach((name) => {
+      const fullname = path.join(source, name)
+      if (fs.lstatSync(fullname).isDirectory()) {
+        subdirs.push(fullname)
+      } else if (fs.lstatSync(fullname).isFile() && (name.substring(name.length - 4) === '.vue')) {
+        files.push(fullname)
+      }
+    })
+    subdirs.forEach(path => files.push(...GetVueComponentsRecursively(path)))
+    return files
+  }
+
+  const getComponentName = (fullname) => path.basename(fullname, path.extname(fullname))
+
+  const getFileName = (source, fullname) =>
+    fullname.replace(source.replace('./', '').replace(/\//g, '\\'), '.').replace(/\\/g, '/')
+
+  const createIndexFile = (source, components) => {
+    const file = path.join(source, 'index.js')
+    let imports = components.reduce((a, fullname) => a + `import ${getComponentName(fullname)} from '${getFileName(source, fullname)}'\n`, '')
+
+    components.forEach((e, i, a) => { a[i] = '  ' + getComponentName(e) })
+    let exports = '\nexport default {\n' + components.join(',\n') + '\n}\n'
+
+    fs.writeFileSync(file, imports + exports)
+  }
+
+  const generateIndex = source => {
+    createIndexFile(source, GetVueComponentsRecursively(source))
+  }
+
+  // gera os arquivos de indices desejados.
+  // vide src/boot/app.js onde é feito import e registro dos componentes
+  console.info('   * src/components/index.js')
+  generateIndex('./src/components')
+}
+
+// main execution
+generateImportIndexes()
+
+loadReverseProxy()
+if (process.argv.length < 3 || process.argv[2] === 'proxy') return
+
+customizeQuasar()
+require(`./node_modules/@quasar/app/bin/quasar`)

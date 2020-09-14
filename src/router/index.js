@@ -1,27 +1,40 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VueMoment from "vue-moment";
-
 import routes from './routes'
+// import { Cookies } from 'quasar'
+// import urls from './urls'
 
-Vue.use(VueRouter, VueMoment)
+Vue.use(VueRouter)
 
-const Router = new VueRouter({
-  /*
-   * NOTE! Change Vue Router mode from quasar.conf.js -> build -> vueRouterMode
-   *
-   * When going with "history" mode, please also make sure "build.publicPath"
-   * is set to something other than an empty string.
-   * Example: '/' instead of ''
-   */
+/*
+ * If not building with SSR mode, you can
+ * directly export the Router instantiation
+ */
 
-  // Leave as is and change from quasar.conf.js instead!
-  mode: process.env.VUE_ROUTER_MODE,
-  base: process.env.VUE_ROUTER_BASE,
-  scrollBehavior: () => ({
-    y: 0
-  }),
-  routes
-})
+export default function (/* { store, ssrContext } */) {
+  const Router = new VueRouter({
+    scrollBehavior: () => ({ y: 0 }),
+    routes,
 
-export default Router
+    // Leave these as is and change from quasar.conf.js instead!
+    // quasar.conf.js -> build -> vueRouterMode
+    // quasar.conf.js -> build -> publicPath
+    mode: process.env.VUE_ROUTER_MODE,
+    base: process.env.VUE_ROUTER_BASE
+  })
+
+  // exige autenticacao em todas as rotas
+  // Router.beforeEach((to, from, next) => {
+  //   if (urls.knownUrls.indexOf(to.fullPath) > -1) {
+  //     next(false)
+  //     return urls.navigateTo(to.fullPath)
+  //   }
+
+  //   const isAuthenticated = Cookies.has(urls.cookieName)
+  //   if (isAuthenticated) return next()
+
+  //   urls.navigateTo(urls.singIn)
+  // })
+
+  return Router
+}

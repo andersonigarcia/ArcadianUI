@@ -1,44 +1,35 @@
-// Configuration for your app
+const path = require('path')
 
+// Configuration for your app
 module.exports = function (ctx) {
   return {
-    // app plugins (/src/plugins)
-    plugins: [
+    // app boot file (/src/boot)
+    // --> boot files are part of "main.js"
+    boot: [
       'axios',
-      'vuelidate'
+      'app'
     ],
+
     css: [
       'app.styl'
     ],
+
     extras: [
-      ctx.theme.mat ? 'roboto-font' : null,
+      'roboto-font',
       'material-icons' // optional, you are not bound to it
-      // 'ionicons',
-      // 'mdi',
-      // 'fontawesome'
+      // 'ionicons-v4',
+      // 'mdi-v3',
+      // 'fontawesome-v5',
+      // 'eva-icons'
     ],
-    supportIE: false,
-    build: {
-      scopeHoisting: true,
-      vueRouterMode: 'history',
-      // vueCompiler: true,
-      // gzip: true,
-      // analyze: true,
-      // extractCSS: false,
-      extendWebpack(cfg) {}
-    },
-    devServer: {
-      // https: true,
-      port: 3000,
-      open: true // opens browser window automatically
-    },
-    // framework: 'all' --- includes everything; for dev only!
+
+    // framework: 'all', // --- includes everything; for dev only!
     framework: {
-      i18n: 'pt-br',
+      all: true,
       components: [
         'QLayout',
-        'QLayoutHeader',
-        'QLayoutDrawer',
+        'QHeader',
+        'QDrawer',
         'QPageContainer',
         'QPage',
         'QToolbar',
@@ -46,57 +37,78 @@ module.exports = function (ctx) {
         'QBtn',
         'QIcon',
         'QList',
-        'QListHeader',
         'QItem',
-        'QItemMain',
-        'QItemSide',
-        'QItemSeparator',
-        'QItemTile',
-        'QBtnDropdown',
-        'QTable',
-        'QTh',
-        'QTr',
-        'QTd',
-        'QTableColumns',
-        'QSelect',
-        'QSearch',
-        'QFab',
-        'QFabAction',
-        'QField',
-        'QInput',
-        'QChipsInput',
-        'QChip',
-        'QTooltip',
-        'QCard',
-        'QCardTitle',
-        'QCardMain',
-        'QCardMedia',
-        'QCardSeparator',
-        'QCardActions',
-        'QInfiniteScroll',
-        'QAlert',
-        'QSpinnerDots',
-        'QAutocomplete',
+        'QItemSection',
+        'QItemLabel',
+        'QDate',
+        'QTime',
+        // 'QDialog',
+        'QTimeline',
+        'QTimelineEntry',
+        'QSpace',
+        'LoadingBar',
+        'QTabPanels',
+        'QTabPanel',
+        'QRadio',
         'QCheckbox'
       ],
+
       directives: [
         'Ripple',
-        'CloseOverlay'
+        // 'CloseDialog',
+        'ClosePopup',
+        // 'Dialog'
+        'GoBack'
       ],
+
       // Quasar plugins
       plugins: [
         'Notify',
-        'Dialog',
         'Loading'
-      ]
-      // iconSet: ctx.theme.mat ? 'material-icons' : 'ionicons'
-      // i18n: 'de' // Quasar language
+      ],
+
+      // iconSet: 'ionicons-v4'
+      lang: 'pt' // Quasar language
     },
+
+    supportIE: true,
+
+    build: {
+      scopeHoisting: true,
+      vueRouterMode: 'history',
+      // vueCompiler: true,
+      // gzip: true,
+      // analyze: true,
+      // extractCSS: false,
+      extendWebpack (cfg) {
+        cfg.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /node_modules/
+        })
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias,
+          mixins: path.resolve(__dirname, './src/mixins'),
+          utils: path.resolve(__dirname, './src/utils')
+        }
+      }
+    },
+
+    devServer: {
+      // https: true,
+      port: 8081,
+      open: true, // opens browser window automatically
+      public: 'localhost'
+    },
+
     // animations: 'all' --- includes all animations
-    animations: [
-      'fadeIn',
-      'fadeOut'
-    ],
+    animations: [],
+
+    ssr: {
+      pwa: false
+    },
+
     pwa: {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {},
@@ -108,8 +120,8 @@ module.exports = function (ctx) {
         orientation: 'portrait',
         background_color: '#ffffff',
         theme_color: '#027be3',
-
-        icons: [{
+        icons: [
+          {
             'src': 'statics/icons/icon-128x128.png',
             'sizes': '128x128',
             'type': 'image/png'
@@ -137,12 +149,14 @@ module.exports = function (ctx) {
         ]
       }
     },
+
     cordova: {
       // id: 'org.cordova.quasar.app'
     },
+
     electron: {
       // bundler: 'builder', // or 'packager'
-      extendWebpack(cfg) {
+      extendWebpack (cfg) {
         // do something with Electron process Webpack cfg
       },
       packager: {
@@ -161,19 +175,6 @@ module.exports = function (ctx) {
         // https://www.electron.build/configuration/configuration
 
         // appId: 'quasar-app'
-
-        extendWebpack(cfg) {
-          cfg.module.rules.push({
-            resourceQuery: /blockType=i18n/,
-            use: [{
-                loader: '@kazupon/vue-i18n-loader'
-              },
-              {
-                loader: 'yaml-loader'
-              }
-            ]
-          })
-        }
       }
     }
   }

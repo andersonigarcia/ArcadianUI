@@ -1,13 +1,13 @@
 <template>
-  <q-page class="flex flex-center">
-    <img alt="Arcadian logo" src="~assets/arcadian-logo.png" height="90%" width="100%">
+  <q-page class="flex flex-center bg-white">
+    <img alt="Quasar logo" src="~assets/arcadian-logo.png" width="100%" />
   </q-page>
 </template>
 
-<style>
-</style>
+<style></style>
 
 <script>
+
 export default {
   name: 'PageIndex'
 }

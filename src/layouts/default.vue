@@ -1,150 +1,156 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-layout-header>
-      <!-- <q-toolbar color="light-blue-5" :glossy="$q.theme === 'mat'" :inverted="$q.theme === 'ios'"> -->
-      <q-toolbar
-        color="blue-grey-6"
-        :inverted="$q.theme === 'ios'"
-      >
-        <q-btn
-          flat
-          dense
-          round
-          @click="leftDrawerOpen = !leftDrawerOpen"
-          aria-label="Menu"
-        >
-          <q-icon name="menu" />
+  <q-layout view="hHH Lpr lfr" container>
+    <q-header elevated class="flat">
+      <q-toolbar class="text-white">
+        <q-btn flat round dense icon="menu" class="q-mr-sm" aria-label="Menu" @click="leftDrawerOpen = !leftDrawerOpen"/>
+        <q-separator dark vertical inset/>
+        <q-toolbar-title>
+          <div class="text-subtitle1 a-lh-sm">{{ title }}</div>
+          <div class="text-grey-4 a-text-caption-sm a-lh-sm" v-show="subtitle">{{ subtitle }}</div>
+        </q-toolbar-title>
+        <q-btn dense flat icon="inbox" class="q-ml-sm">
+          <q-badge color="red" floating>9</q-badge>
         </q-btn>
-
-        <q-toolbar-title></q-toolbar-title>
-
-        <div>
-          <q-toolbar-title>
-            <div>Arcadian Lab</div>
-            <div slot="subtitle">Sistema de gestão laboratórial</div>
-          </q-toolbar-title>
-        </div>
       </q-toolbar>
-    </q-layout-header>
+    </q-header>
 
-    <q-layout-drawer
-      v-model="leftDrawerOpen"
-      :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null"
-    >
-      <cardusuario
-        nome="Marcos Ucho de noronha"
-        cargo="Especialista em Gesso"
-      ></cardusuario>
-      <q-list
-        no-border
-        link
-        inset-delimiter
-      >
-        <!-- <q-list-header class="shadow-1"> Produção</q-list-header> -->
-        <!-- <q-item to>
-          <q-item-side icon="view_module"/>
-          <q-item-main label="Clientes" title="...consulta e manutenção."/>
+    <q-drawer v-model="leftDrawerOpen" bordered content-class="bg-white">
+      <q-list>
+        <q-item dense clickable to="/" class="bg-grey-3">
+          <q-item-section>
+            <q-item-label header class="text-h6 a-text-dense text-grey-10"> MENU
+              <q-item-label caption class="a-text-dense">Gestão laboratorial</q-item-label>
+            </q-item-label>
+          </q-item-section>
         </q-item>
-
-        <q-item to="logar">
-          <q-item-side icon="view_module"/>
-          <q-item-main label="Gestão" title="Menu de Gestao"/>
-        </q-item>-->
-        <q-item to="produto">
-          <q-item-side icon="view_module" />
-          <q-item-main
-            label="Produtos"
-            title="...consulta e manutenção."
-          />
+        <q-separator/>
+        <q-item clickable :to="identityUrl">
+          <q-item-section avatar>
+            <q-icon name="perm_identity"/>
+          </q-item-section>
+          <q-item-section>{{ user }}</q-item-section>
         </q-item>
-
-        <q-item to="Servicos">
-          <q-item-side icon="view_module" />
-          <q-item-main
-            label="Serviços"
-            title="...acompanhamento e execução."
-          />
+        <q-separator/>
+        <q-item-label header>Produção</q-item-label>
+        <q-separator inset/>
+        <q-item clickable to="/ordem-servico" exact>
+          <q-item-section avatar>
+            <q-icon name="add_circle"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Nova Ordem de Serviço</q-item-label>
+            <q-item-label caption>Registrar nova ordem de serviço</q-item-label>
+          </q-item-section>
         </q-item>
-
-        <q-item to="MinhasAtividades">
-          <q-item-side icon="view_module" />
-          <q-item-main
-            label="Minhas Atividades"
-            title="...consulta e manutenção."
-          />
+        <q-item clickable to="/ordens-servicos" exact>
+          <q-item-section avatar>
+            <q-icon name="ballot"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Ordens de Serviços</q-item-label>
+            <q-item-label caption>Acompanhar OSs e seus serviços</q-item-label>
+          </q-item-section>
         </q-item>
-
-        <!-- <q-item to="logar">
-          <q-item-side icon="view_module"/>
-          <q-item-main label="Transporte" title="...rotas, coletas e entregas."/>
+        <q-item clickable to="/inbox">
+          <q-item-section avatar>
+            <q-icon name="inbox"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Minhas Atividades</q-item-label>
+            <q-item-label caption>Inbox das minhas atividades</q-item-label>
+          </q-item-section>
         </q-item>
-
-        <q-item to="/">
-          <q-item-side icon="settings"/>
-          <q-item-main label="Configurações" title="...personalizadas do sistema."/>
-        </q-item>-->
-        <!-- <q-item @click.native="view('')" > -->
-        <!-- <q-item to="servico" >
-          <q-item-side icon="view_module" />
-          <q-item-main label="Serviços"/>
-        </q-item>-->
-        <!-- <q-item >
-          <q-item-side icon="gavel" />
-          <q-item-main label="Produção"/>
-        </q-item>-->
-        <!-- <q-card-separator />
-        <h7> Menu temporário</h7>
-
-        <q-item to="exemplo" >
-          <q-item-side icon=""/>
-          <q-item-main label="Exemplos" />
+        <q-separator/>
+        <q-item-label header>Cadastro</q-item-label>
+        <q-separator inset/>
+        <q-item clickable to="/clientes">
+          <q-item-section avatar>
+            <q-icon name="account_box"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Clientes</q-item-label>
+            <q-item-label caption>Dentistas, clínicas e outros</q-item-label>
+          </q-item-section>
         </q-item>
-
-        <q-item to="logar" >
-          <q-item-side icon="" />
-          <q-item-main label="Login"  />
-        </q-item>-->
-        <!-- <q-item to="ccFormProduto" >
-          <q-item-side icon="fitness_center" />
-          <q-item-main label="Form Produtos" />
-        </q-item>-->
-        <!--
-        <q-item @click.native="openURL('https://twitter.com/quasarframework')">
-          <q-item-side icon="rss feed" />
-          <q-item-main label="Twitter" sublabel="@quasarframework" />
-        </q-item>-->
+        <q-item clickable to="/produtos">
+          <q-item-section avatar>
+            <q-icon name="style"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Produtos</q-item-label>
+            <q-item-label caption>Produtos e suas atividades</q-item-label>
+          </q-item-section>
+        </q-item>
+         <q-item clickable to="/categorias">
+          <q-item-section avatar>
+            <q-icon name="collections_bookmark"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Categorias</q-item-label>
+            <q-item-label caption>Categorias de produtos</q-item-label>
+          </q-item-section>
+        </q-item>
+         <q-item clickable to="/workflows">
+          <q-item-section avatar>
+            <q-icon name="vertical_split"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Workflows</q-item-label>
+            <q-item-label caption>Workflows de produtos</q-item-label>
+          </q-item-section>
+        </q-item>
+         <!-- <q-item clickable to="/teste/Workflow">
+          <q-item-section avatar>
+            <q-icon name="vertical_split"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>teste workflow</q-item-label>
+            <q-item-label caption>teste de drag in grop</q-item-label>
+          </q-item-section>
+        </q-item> -->
+         <q-item clickable to="/colaboradores">
+          <q-item-section avatar>
+            <q-icon name="assignment_ind"/>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Colaboradores</q-item-label>
+            <q-item-label caption>Lista de Colaboradores</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-separator/>
+        <q-item clickable :to="signOutUrl">
+          <q-item-section avatar>
+            <q-icon name="highlight_off"/>
+          </q-item-section>
+          <q-item-section>Sair</q-item-section>
+        </q-item>
+        <q-separator/>
       </q-list>
-
-      <br>
-      <q-card-separator />
-    </q-layout-drawer>
+    </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <router-view/>
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import { openURL } from "quasar";
-import cardusuario from "../components/card/usuario";
+import urls from '../router/urls'
 
 export default {
-  name: "LayoutDefault",
-  components: {
-    cardusuario
-    // selecaoLinguagem
-  },
+  name: 'Default',
   data () {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop
-    };
+      leftDrawerOpen: this.$q.screen.gt.xs,
+      identityUrl: urls.identity,
+      signOutUrl: urls.singOut
+    }
   },
-  methods: {
-    openURL
-  }
-};
-</script>
 
-<style>
-</style>
+  computed: {
+    title () { return this.$route.meta.title },
+    subtitle () { return this.$route.meta.subtitle },
+    user () { return this.$q.cookies.get(urls.cookieName) }
+  }
+}
+</script>
