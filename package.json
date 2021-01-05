@@ -13,7 +13,7 @@
   "dependencies": {
     "@quasar/extras": "^1.2.0",
     "accounting-js": "^1.1.1",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "quasar": "^1.0.5",
     "v-money": "^0.8.1",
     "vuedraggable": "^2.23.0"
